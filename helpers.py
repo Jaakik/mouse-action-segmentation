@@ -10,6 +10,7 @@ from tqdm import tqdm
 import os
 import random
 import torch
+import random
 
 body_parts = 7
 fps = 30
@@ -95,7 +96,7 @@ def bounding_box(data):
         dx = np.minimum(x_max_1, x_max_2) - np.maximum(x_min_1, x_min_2)
         dy = np.minimum(y_max_1, y_max_2) - np.maximum(y_min_1, y_min_2)
         int_area = np.abs(dx*dy)
-        int_area[(dx<0) & (dy<0)] = 0
+        int_area[(dx<0) | (dy<0)] = 0
         out[:, 0:28] = single_sequence[:, 0:28]
         out[:, 28] = int_area
         data[sequence_key] = out
@@ -242,8 +243,10 @@ def augment(data, labels, annotators, task, behavior=-1):
     seed_everything(2021)
     keys = list(data.keys())
     if task==2:
+        rand_aug = random.sample(keys, 70%len(keys))
         for seq_id in keys:
             for a in range(aug_num[task]-1):
+                if ((a == aug_num[task]-2) & (seq_id not in rand_aug)): continue
                 new_name = seq_id + "aug" + str(a+1) + "anno" +str(annotators[seq_id])
                 data[new_name] = augment_fn(data[seq_id])
                 labels[new_name] = labels[seq_id]
@@ -253,9 +256,12 @@ def augment(data, labels, annotators, task, behavior=-1):
             del data[seq_id]
             del labels[seq_id]
     if task == 3:
+        a_num = int(np.floor(10 / len(data)))
+        rand_aug = random.sample(keys, 10 % len(keys))
         for seq_id in keys:
-            for a in range(aug_num[task]-1):
-                new_name = seq_id + "aug" + str(a+1) +"beh"+ str(behavior)
+            for a in range(a_num):
+                if ((a == a_num - 1) & (seq_id not in rand_aug)): continue
+                new_name = seq_id + "aug" + str(a+1) + "beh" + str(behavior)
                 data[new_name] = augment_fn(data[seq_id])
                 labels[new_name] = labels[seq_id]
             new_name = seq_id + "aug" + str(0) + "beh" + str(behavior)
