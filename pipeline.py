@@ -60,7 +60,7 @@ def pipeline(data, train=False, task=1, behavior=-1):
     data = center_of_mass(data)
 
     print("Augmenting with speed data")
-    data = speed(data)
+    # data = speed(data)
 
     print("Writing Files")
     for seq_id in tqdm(list(data.keys())):
