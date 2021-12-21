@@ -17,12 +17,12 @@ torch.backends.cudnn.deterministic = True
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--action', default='train')
-parser.add_argument('--dataset', default="gtea")
+parser.add_argument('--dataset', default="mouse")
 parser.add_argument('--split', default='1')
 
-parser.add_argument('--features_dim', default='2048', type=int)
+parser.add_argument('--features_dim', default='113', type=int)
 parser.add_argument('--bz', default='1', type=int)
-parser.add_argument('--lr', default='0.0005', type=float)
+parser.add_argument('--lr', default='0.0008', type=float)
 
 
 parser.add_argument('--num_f_maps', default='64', type=int)
