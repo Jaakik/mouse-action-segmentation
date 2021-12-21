@@ -1,8 +1,8 @@
 #!/usr/bin/python2.7
 
 import torch
-from tcn_multitask import Trainer
-from batch_gen_multitask import BatchGenerator
+from model.tcn_multitask import Trainer
+from dataGenerator.batch_gen_multitask import BatchGenerator
 import os
 import argparse
 import random

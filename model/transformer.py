@@ -7,7 +7,7 @@ import copy
 import numpy as np
 import math
 
-from .metrics import segment_bars_with_confidence
+from metrics import segment_bars_with_confidence
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
