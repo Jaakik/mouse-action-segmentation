@@ -75,7 +75,7 @@ class BatchGenerator(object):
         ann = "ann_"
 
         for vid in batch_1:
-            features = np.load(self.features_path_1 + vid.split('.')[0] + '.npy')
+            features = np.load(self.features_path_1 + vid.split('.')[0] + '.npy').T
             file_ptr = open(self.gt_path_1 + vid, 'r')
             content = file_ptr.read().split('\n')[:-1]
             classes = np.zeros(min(np.shape(features)[1], len(content)))
@@ -87,7 +87,7 @@ class BatchGenerator(object):
         for vid in batch_2:
             # identifier at the end of each video
             ann += vid.split('.')[0][-1]
-            features = np.load(self.features_path_2 + vid.split('.')[0] + '.npy')
+            features = np.load(self.features_path_2 + vid.split('.')[0] + '.npy').T
             file_ptr = open(self.gt_path_2 + vid, 'r')
             content = file_ptr.read().split('\n')[:-1]
             classes = np.zeros(min(np.shape(features)[1], len(content)))
@@ -99,7 +99,7 @@ class BatchGenerator(object):
         for vid in batch_3:
             # identifier at the end of each video
             beh += vid.split('.')[0][-1]
-            features = np.load(self.features_path_3 + vid.split('.')[0] + '.npy')
+            features = np.load(self.features_path_3 + vid.split('.')[0] + '.npy').T
             file_ptr = open(self.gt_path_3 + vid, 'r')
             content = file_ptr.read().split('\n')[:-1]
             classes = np.zeros(min(np.shape(features)[1], len(content)))

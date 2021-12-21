@@ -1,8 +1,8 @@
 #!/usr/bin/python2.7
 
 import torch
-from model import Trainer
-from batch_gen import BatchGenerator
+from tcn_multitask import Trainer
+from batch_gen_multitask import BatchGenerator
 import os
 import argparse
 import random
@@ -36,7 +36,7 @@ parser.add_argument('--num_R', type=int)
 args = parser.parse_args()
 
 num_epochs = args.num_epochs
-features_dim = 100
+features_dim = 113
 bz = args.bz
 lr = args.lr
 
@@ -47,20 +47,20 @@ num_f_maps = args.num_f_maps
 
 sample_rate = 1
 
-vid_list_file_1 = "data/task_1/splits/train.split.bundle"
+vid_list_file_1 = "data/task_1/splits/train_1.split.bundle"
 vid_list_file_tst_1 = "data/task_1/splits/test.split.bundle"
 features_path_1 = "data/task_1/features/"
-gt_path_1 = "/Users/marouanejaakik/Desktop/MS-TCN2/data/task_1/groundTruth/"
+gt_path_1 = "data/task_1/groundTruth/"
 mapping_file_1 = "data/task_1/mapping.txt"
 
-vid_list_file_3 = "data/task_3/splits/train.split.bundle"
+vid_list_file_3 = "data/task_3/splits/train_3.split.bundle"
 vid_list_file_tst_3 = "data/task_3/splits/test.split.bundle"
 features_path_3 = "data/task_3/features/"
 gt_path_3 = "data/task_3/groundTruth/"
 mapping_file_3 = "data/task_3/mapping.txt"
 
 
-vid_list_file_2 = "data/task_2/splits/train.split.bundle"
+vid_list_file_2 = "data/task_2/splits/train_2.split.bundle"
 vid_list_file_tst_2 = "data/task_2/splits/test.split.bundle"
 features_path_2 = "data/task_2/features/"
 gt_path_2 = "data/task_2/groundTruth/"
