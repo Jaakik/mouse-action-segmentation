@@ -40,14 +40,11 @@ def extract_features(data, train=False):
             label_dict[sequence_key] = data["sequences"][sequence_key]['annotations']
     return data_dict, label_dict, anno_dict
 
-def anno_id_counts(dataset):
-  all_annotator_ids = [dataset["sequences"][k]['annotator_id'] for k in dataset["sequences"]]
-  unique_annotator_ids, annotator_id_counts = np.unique(all_annotator_ids, return_counts=True)
-  for uaid, aic in zip(unique_annotator_ids, annotator_id_counts):
-      print(f"Annotator id: {uaid} |  Number of sequences: {aic}")
-
 
 def interpolate_frame(data, label_dict, n):
+    ''' Taking the sequence of keypoints and increading the frame rate by adding n frames between each frame, with the
+     use of pandas dataframe interpolation. Interpolation is quadratic, and the output data is approximately (n+1) times
+     larger. '''
     sequence_train_names = list(data.keys())
     for sequence_key in tqdm(sequence_train_names):
         single_sequence = pd.DataFrame(data[sequence_key])
@@ -66,9 +63,10 @@ def interpolate_frame(data, label_dict, n):
     return data, label_dict
 
 def seed_everything(seed):
-  np.random.seed(seed)
-  os.environ['PYTHONHASHSEED'] = str(seed)
-  random.seed(seed)
+    ''' Seed for a random number generator'''
+    np.random.seed(seed)
+    os.environ['PYTHONHASHSEED'] = str(seed)
+    random.seed(seed)
 
 def bounding_box(data):
     ''' Adds a feature which corresponds to the area of intersection between the mice based on the two rectangles
@@ -109,6 +107,9 @@ def bounding_box(data):
 
 
 def center_of_mass(data):
+    ''' Function that calculates the coordinates of the center of mass of the mice. It also adds the mouse dispersion
+    data which is the average distance of the keypoints to the center of mass. Additionally, the distance between the
+    centers of mass is calculated, which adds an additional 7 features '''
     sequence_train_names = data.keys()
     for sequence_key in tqdm(sequence_train_names):
         single_sequence = data[sequence_key]
@@ -136,13 +137,9 @@ def center_of_mass(data):
     return data
 
 
-def get_percentage(sequence_key, num_to_text, data, vocabulary):
-    anno_seq = num_to_text(data['sequences'][sequence_key]['annotations'])
-    counts = {k: np.mean(np.array(anno_seq) == k) for k in vocabulary}
-    return counts
-
 
 def center_origin(data_dict, x_offset, y_offset):
+    ''' Function that transposes the x and y coordinates of the keypoints by the given offset. '''
     center_dict = {}
     for seq_name in tqdm(data_dict.keys()):
         center_dict[seq_name] = np.zeros(data_dict[seq_name].shape)
@@ -152,17 +149,9 @@ def center_origin(data_dict, x_offset, y_offset):
         center_dict[seq_name][:,21:28] = data_dict[seq_name][:,21:28] - y_offset
     return center_dict
 
-def standardize(data_dict, x_max, y_max):
-    standard_dict = {}
-    for seq_name in tqdm(data_dict.keys()):
-        standard_dict[seq_name] = np.zeros(data_dict[seq_name].shape)
-        standard_dict[seq_name][0:7] = data_dict[seq_name][0:7]/x_max
-        standard_dict[seq_name][7:14] = data_dict[seq_name][7:14]/y_max
-        standard_dict[seq_name][14:21] = data_dict[seq_name][14:21]/x_max
-        standard_dict[seq_name][21:28] = data_dict[seq_name][21:28]/y_max
-    return standard_dict
-
 def speed(data_dict, int_factor):
+    ''' Function that calculates the speed of the keypoints, as well as the distance between the joins of each given
+    mouse, the distance between the corresponding joints of both mice'''
     for seq_id in tqdm(list(data_dict.keys())):
         keypoints = data_dict[seq_id]
         shape = keypoints.shape
@@ -196,6 +185,8 @@ def speed(data_dict, int_factor):
     return data_dict
 
 def augment_fn(X):
+    ''' Function that artificially creates new sequences based on existing sequence X by mirroring the keypoints, adding
+    a random rotation, random shift and some gaussian noise. It return a new sequence  '''
     new_X = copy.copy(X)
     mouse1xy = X[:, 0:14].reshape((X.shape[0], 2, 7))
     mouse2xy = X[:, 14:28].reshape((X.shape[0], 2, 7))
@@ -244,7 +235,8 @@ def augment_fn(X):
 
 
 def augment(data, labels, annotators, task, behavior=-1):
-
+    ''' Parent function that augments the data based on the task. It is designed to create exactly 70 sequences for
+    each task, and to do so it creates enough copies of each sequence to match the output. '''
     seed_everything(2021)
     keys = list(data.keys())
     if task==2:

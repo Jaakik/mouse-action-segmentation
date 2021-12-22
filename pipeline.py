@@ -26,12 +26,11 @@ class_to_color = {'other': 'white', 'attack': 'red', 'mount': 'green',
 def pipeline(data, train=False, task=1, behavior=-1, intpol=-1):
     ''' The data parameter is the raw imported dataset '''
 
-
+    # Obtaining the correct output paths
     if task<4:
         outpath = "data/task_" + str(task) + "/"
     elif task==4:
         outpath = "data/testFeat/"
-    # sequence_names = list(data["sequences"].keys())
 
     # Extracting the data and the labels (if training set)
     print("Extracting features")
@@ -62,7 +61,7 @@ def pipeline(data, train=False, task=1, behavior=-1, intpol=-1):
     data = center_of_mass(data)
 
     print("Augmenting with speed data")
-    # data = speed(data, INT_CONSTANT+1)
+    data = speed(data, INT_CONSTANT+1)
 
     print("Writing Files")
     if task<4:

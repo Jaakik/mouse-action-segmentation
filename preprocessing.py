@@ -1,4 +1,4 @@
-# python3 run.py --task n --intpol i
+# python3 preprocessing.py --task n --intpol i
 
 import pandas as pd
 import numpy as np
@@ -16,14 +16,13 @@ if __name__ == "__main__":
     task = args.task
     intpol = args.intpol
     if task<4:
-        train = np.load('data/task_'+ str(task) +'/train.npy', allow_pickle=True).item()
+        task_dir = 'data/task_' + str(task) + '/'
+        if not os.path.exists(task_dir):
+            os.makedirs(task_dir)
+        train = np.load(task_dir + 'train.npy', allow_pickle=True).item()
     elif task == 4:
         test = np.load('data/test.npy', allow_pickle=True).item()
-    # sample_submission = np.load('data/task_'+ str(task) + '/sample_submission.npy', allow_pickle=True).item()
 
-    # class_to_number = {s: i for i, s in enumerate(train['vocabulary'])}
-    # number_to_class = {i: s for i, s in enumerate(train['vocabulary'])}
-    # vocabulary = train['vocabulary']
 
     if task<3:
         tr_data = pipeline(train, train=True, task=task, behavior=-1, intpol=intpol)
