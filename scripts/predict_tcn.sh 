@@ -1,0 +1,3 @@
+#!/bin/bash
+
+python run_tcn.py --action=predict

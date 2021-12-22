@@ -1,6 +1,6 @@
 #!/bin/bash
 
-python main.py --action=train   \
+python run_tcn.py --action=train   \
                 --num_epochs=100 \
                 --num_layers_PG=11 \
                 --num_layers_R=10 \
