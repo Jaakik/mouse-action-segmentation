@@ -1,6 +1,6 @@
 #!/bin/bash
 # Usage:
-#   sh preprocessing.sh n
+#   sh ./scripts/preprocessing.sh n
 # where n is the number of interpolated frames in between each frame.
 # This script generates the necessary feature files that can be fed into the model. Make sure that before running the
 # Following folder structure is maintained:

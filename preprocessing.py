@@ -35,7 +35,7 @@ if __name__ == "__main__":
             print("\n")
     elif task == 4:
         te_data = pipeline(test, train=False, task=task, behavior=-1, intpol=0)
-    if task<3:
+    if task<4:
         files = os.listdir(task_dir + "groundTruthInt" + str(intpol) + "/")
         bundle = task_dir + "splits/trainInt" + str(intpol) + ".split"
         Path(bundle).touch()
