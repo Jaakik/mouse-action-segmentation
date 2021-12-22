@@ -27,25 +27,21 @@ def pipeline(data, train=False, task=1, behavior=-1, intpol=-1):
     ''' The data parameter is the raw imported dataset '''
 
     # Obtaining the correct output paths
-    if task<4:
+    if task < 4:
         outpath = "data/task_" + str(task) + "/"
-    elif task==4:
+    elif task == 4:
         outpath = "data/testFeat/"
 
     # Extracting the data and the labels (if training set)
     print("Extracting features")
     data, labels, annotators = extract_features(data, train)
+
     # centering the coordinates around the middle
-    # data = center_origin(data, FRAME_WIDTH_TOP / 2, FRAME_HEIGHT_TOP / 2)
+    print("Centering origin")
+    data = center_origin(data, FRAME_WIDTH_TOP / 2, FRAME_HEIGHT_TOP / 2)
 
     if train:
         data, labels = augment(data, labels, annotators, task, behavior)
-
-    # (normalize maybe?)
-    #
-    # print("Standardizing")
-    # data = standardize(data, FRAME_WIDTH_TOP, FRAME_HEIGHT_TOP)
-
 
     # Interpolating if we're dealing with training data
     if train & (len(labels) != 0) & intpol>0:
@@ -53,17 +49,17 @@ def pipeline(data, train=False, task=1, behavior=-1, intpol=-1):
         data, labels = interpolate_frame(data, labels, intpol)
 
     # augmenting data with bounded box intersection area (adding one column)
-    print("Augmenting with bounding box")
+    # print("Augmenting with bounding box")
     # data = bounding_box(data)
 
     # augmenting data with center of mass data, egocentric distance, mouse extension
     print("Augmenting with center of mass")
     data = center_of_mass(data)
 
-    print("Augmenting with speed data")
-    data = speed(data, INT_CONSTANT+1)
+    # print("Augmenting with speed data")
+    # data = speed(data, INT_CONSTANT+1)
 
-    print("Writing Files")
+    print("Writing Feature Files")
     if task<4:
         outFeat = outpath+"featuresInt"+str(intpol)+"/"
         outGT = outpath+"groundTruthInt"+str(intpol)+"/"

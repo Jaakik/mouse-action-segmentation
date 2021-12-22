@@ -3,6 +3,7 @@
 import pandas as pd
 import numpy as np
 import os
+from pathlib import Path
 from pipeline import pipeline
 from helpers import *
 import argparse
@@ -31,5 +32,13 @@ if __name__ == "__main__":
             print(behavior)
             b = int(behavior.split('-')[-1])
             pipeline(train[behavior], train=True, task=task, behavior=b, intpol=intpol)
+            print("\n")
     elif task == 4:
         te_data = pipeline(test, train=False, task=task, behavior=-1, intpol=0)
+    if task<3:
+        files = os.listdir(task_dir + "groundTruthInt" + str(intpol) + "/")
+        bundle = task_dir + "splits/trainInt" + str(intpol) + ".split"
+        Path(bundle).touch()
+        with open(bundle, "w") as out:
+            for file in files:
+                out.writelines(file + "\n")

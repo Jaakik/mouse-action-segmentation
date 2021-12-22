@@ -10,7 +10,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
     intpol = args.intpol
     task = args.task
-    if task < 3:
+    if task < 4:
         inPath = "data/task_" + str(task) + "/featuresInt" + str(intpol) + "/"
         outPath = "data/task_" + str(task) + "/featuresStdInt" + str(intpol) + "/"
     elif task==4:
