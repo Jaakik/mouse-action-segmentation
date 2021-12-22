@@ -116,7 +116,7 @@ def plot_annotation_strip(annotation_sequence, start_frame=0, stop_frame=100, ti
     # Map annotations to a number.
     annotation_num = []
     for item in annotation_sequence[start_frame:stop_frame]:
-        annotation_num.append(class_to_number[item])
+        annotation_num.append([item])
 
     all_classes = list(set(annotation_sequence[start_frame:stop_frame]))
 

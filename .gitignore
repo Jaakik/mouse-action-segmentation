@@ -4,3 +4,4 @@ data
 models
 logs
 spl
+__pycache__

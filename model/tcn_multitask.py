@@ -291,9 +291,9 @@ class Trainer:
                 loss_3 = 0
 
                 # TODO weight losses for finetuning
-                w1 = 0.4
-                w2 = 0.4
-                w3 = 0.3
+                w1 = 0.2
+                w2 = 0.2
+                w3 = 0.6
 
                 for p in predictions_1:
                     loss_1 += self.ce(p.transpose(2, 1).contiguous().view(-1, self.num_classes_1),
@@ -316,7 +316,7 @@ class Trainer:
                         self.mse(F.log_softmax(p[:, :, 1:], dim=1), F.log_softmax(p.detach()[:, :, :-1], dim=1)), min=0,
                         max=16) * mask_3[:, :, 1:])
 
-                loss = w1 * loss_1 + w2 * loss_2 + w3 * loss_3
+                loss = (w1 * loss_1 + w2 * loss_2 + w3 * loss_3) * 0.1
                 epoch_loss += loss.item()
                 loss.backward()
                 optimizer.step()

@@ -35,10 +35,12 @@ parser.add_argument('--num_R', type=int)
 
 args = parser.parse_args()
 
+
+
 num_epochs = args.num_epochs
-features_dim = 113
+features_dim = 112
 bz = args.bz
-lr = args.lr
+lr = 0.0008
 
 num_layers_PG = args.num_layers_PG
 num_layers_R = args.num_layers_R
@@ -47,23 +49,23 @@ num_f_maps = args.num_f_maps
 
 sample_rate = 1
 
-vid_list_file_1 = "data/task_1/splits/train_1.split.bundle"
+vid_list_file_1 = "data/task_1/splits/trainStd.bundle"
 vid_list_file_tst_1 = "data/task_1/splits/test.split.bundle"
-features_path_1 = "data/task_1/features/"
-gt_path_1 = "data/task_1/groundTruth/"
+features_path_1 = "data/task_1/featuresStdInt0/"
+gt_path_1 = "data/task_1/groundTruthInt0/"
 mapping_file_1 = "data/task_1/mapping.txt"
 
-vid_list_file_3 = "data/task_3/splits/train_3.split.bundle"
+vid_list_file_3 = "data/task_3/splits/trainStd.bundle"
 vid_list_file_tst_3 = "data/task_3/splits/test.split.bundle"
-features_path_3 = "data/task_3/features/"
-gt_path_3 = "data/task_3/groundTruth/"
+features_path_3 = "data/task_3/featuresStdInt0/"
+gt_path_3 = "data/task_3/groundTruthInt0/"
 mapping_file_3 = "data/task_3/mapping.txt"
 
 
-vid_list_file_2 = "data/task_2/splits/train_2.split.bundle"
+vid_list_file_2 = "data/task_2/splits/train.bundle"
 vid_list_file_tst_2 = "data/task_2/splits/test.split.bundle"
-features_path_2 = "data/task_2/features/"
-gt_path_2 = "data/task_2/groundTruth/"
+features_path_2 = "data/task_2/featuresStdInt0/"
+gt_path_2 = "data/task_2/groundTruthInt0/"
 
 model_dir = "./models/"+args.dataset+"/split_"+args.split
 results_dir = "./results/"+args.dataset+"/split_"+args.split
