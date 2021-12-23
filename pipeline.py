@@ -60,7 +60,7 @@ def pipeline(data, train=False, task=1, behavior=-1, intpol=-1):
     data = center_of_mass(data)
 
     print("Augmenting with speed data")
-    # data = speed(data, INT_CONSTANT+1)
+    data = speed(data, INT_CONSTANT+1)
 
     print("Writing Feature Files")
     if task<4:
