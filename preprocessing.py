@@ -5,7 +5,6 @@ import numpy as np
 import os
 from pathlib import Path
 from pipeline import pipeline
-from helpers import *
 import argparse
 
 
@@ -16,6 +15,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
     task = args.task
     intpol = args.intpol
+
     if task<4:
         task_dir = 'data/task_' + str(task) + '/'
         if not os.path.exists(task_dir):
@@ -37,7 +37,7 @@ if __name__ == "__main__":
         te_data = pipeline(test, train=False, task=task, behavior=-1, intpol=0)
     if task<4:
         files = os.listdir(task_dir + "groundTruthInt" + str(intpol) + "/")
-        bundle = task_dir + "splits/trainInt" + str(intpol) + ".split"
+        bundle = task_dir + "splits/trainInt" + str(intpol) + ".bundle"
         Path(bundle).touch()
         with open(bundle, "w") as out:
             for file in files:

@@ -19,6 +19,9 @@ INT_CONSTANT = 2
 PLOT_MOUSE_START_END = [(0, 1), (0, 2), (1, 3), (2, 3), (3, 4),
                         (3, 5), (4, 6), (5, 6), (1, 2)]
 
+mapping_12 = [str(i)+" "+str(i) for i in range(4)]
+mapping_3 = [str(i)+" "+str(i) for i in range(2)]
+
 
 class_to_color = {'other': 'white', 'attack': 'red', 'mount': 'green',
                   'investigation': 'orange'}
@@ -65,6 +68,9 @@ def pipeline(data, train=False, task=1, behavior=-1, intpol=-1):
         outGT = outpath+"groundTruthInt"+str(intpol)+"/"
         if not os.path.exists(outGT):
             os.makedirs(outGT)
+        np.savetxt("data/task_1/mapping.txt", mapping_12, fmt='%s')
+        np.savetxt("data/task_2/mapping.txt", mapping_12, fmt='%s')
+        np.savetxt("data/task_3/mapping.txt", mapping_3, fmt='%s')
     elif task == 4:
         outFeat = outpath
     if not os.path.exists(outFeat):

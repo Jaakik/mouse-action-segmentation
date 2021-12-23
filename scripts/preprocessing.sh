@@ -22,7 +22,8 @@
 #  └── ...
 #
 #
-# Where the train.npy and test.npy files are the dataset files for the corresponding tasks that can be found at the following links:
+# Where the train.npy and test.npy files are the dataset files for the corresponding tasks that can be found at
+# the following links present in the README.md
 #     task 1 - https://www.aicrowd.com/challenges/multi-agent-behavior-representation-modeling-measurement-and-applications/problems/mabe-task-1-classical-classification/dataset_files?unique_download_uri=3289&challenge_id=755
 #     task 2 - https://www.aicrowd.com/challenges/multi-agent-behavior-representation-modeling-measurement-and-applications/problems/mabe-task-2-annotation-style-transfer/dataset_files?unique_download_uri=3292&challenge_id=756
 #     task 3 - https://www.aicrowd.com/challenges/multi-agent-behavior-representation-modeling-measurement-and-applications/problems/mabe-task-3-learning-new-behavior/dataset_files?unique_download_uri=3295&challenge_id=757

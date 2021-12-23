@@ -19,6 +19,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument('--action', default='train')
 parser.add_argument('--dataset', default="mouse")
 parser.add_argument('--split', default='1')
+parser.add_argument('--intpol', default='0')
 
 parser.add_argument('--features_dim', default='113', type=int)
 parser.add_argument('--bz', default='1', type=int)
@@ -46,23 +47,24 @@ num_layers_PG = args.num_layers_PG
 num_layers_R = args.num_layers_R
 num_R = args.num_R
 num_f_maps = args.num_f_maps
+intpol = args.intpol
 
 sample_rate = 1
 
-vid_list_file_1 = "data/task_1/splits/trainStd.bundle"
+vid_list_file_1 = "data/task_1/splits/trainInt"+str(intpol)+".bundle"
 vid_list_file_tst_1 = "data/task_1/splits/test.split.bundle"
 features_path_1 = "data/task_1/featuresStdInt0/"
 gt_path_1 = "data/task_1/groundTruthInt0/"
 mapping_file_1 = "data/task_1/mapping.txt"
 
-vid_list_file_3 = "data/task_3/splits/trainStd.bundle"
+vid_list_file_3 = "data/task_3/splits/trainInt"+str(intpol)+".bundle"
 vid_list_file_tst_3 = "data/task_3/splits/test.split.bundle"
 features_path_3 = "data/task_3/featuresStdInt0/"
 gt_path_3 = "data/task_3/groundTruthInt0/"
 mapping_file_3 = "data/task_3/mapping.txt"
 
 
-vid_list_file_2 = "data/task_2/splits/train.bundle"
+vid_list_file_2 = "data/task_2/splits/trainInt"+str(intpol)+".bundle"
 vid_list_file_tst_2 = "data/task_2/splits/test.split.bundle"
 features_path_2 = "data/task_2/featuresStdInt0/"
 gt_path_2 = "data/task_2/groundTruthInt0/"
