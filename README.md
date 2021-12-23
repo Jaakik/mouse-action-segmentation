@@ -66,4 +66,5 @@ sh scripts/train_transformer.sh
 It is subsequently possible to generate predictions using:
 ```
 sh scripts/predict_transformer.sh 
+sh scripts/predict_tcn.sh
 ```
