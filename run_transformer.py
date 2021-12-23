@@ -23,8 +23,10 @@ parser.add_argument('--dataset', default="50salads")
 parser.add_argument('--split', default='1')
 parser.add_argument('--model_dir', default='models')
 parser.add_argument('--result_dir', default='results')
+parser.add_argument('--intpol', default='0')
 
 args = parser.parse_args()
+intpol = args.intpol
 
 num_epochs = 100
 
@@ -36,7 +38,7 @@ bz = 1
 
 channel_mask_rate = 0.3
 
-vid_list_file = "data/task_1/splits/trainStd.bundle"
+vid_list_file = "data/task_1/splits/trainInd"+str(intpol)+".bundle"
 vid_list_file_tst = "data/task_1/splits/test.split.bundle"
 features_path = "data/task_1/featuresStdInt0/"
 gt_path= "data/task_1/groundTruthInt0/"

@@ -39,7 +39,7 @@ args = parser.parse_args()
 
 
 num_epochs = args.num_epochs
-features_dim = 112
+features_dim = 35
 bz = args.bz
 lr = 0.0008
 
@@ -53,20 +53,20 @@ sample_rate = 1
 
 vid_list_file_1 = "data/task_1/splits/trainInt"+str(intpol)+".bundle"
 vid_list_file_tst_1 = "data/task_1/splits/test.split.bundle"
-features_path_1 = "data/task_1/featuresStdInt0/"
-gt_path_1 = "data/task_1/groundTruthInt0/"
+features_path_1 = "data/task_1/featuresStdInt"+str(intpol)+"/"
+gt_path_1 = "data/task_1/groundTruthInt"+str(intpol)+"/"
 mapping_file_1 = "data/task_1/mapping.txt"
 
 vid_list_file_3 = "data/task_3/splits/trainInt"+str(intpol)+".bundle"
 vid_list_file_tst_3 = "data/task_3/splits/test.split.bundle"
-features_path_3 = "data/task_3/featuresStdInt0/"
-gt_path_3 = "data/task_3/groundTruthInt0/"
+features_path_3 = "data/task_3/featuresStdInt"+str(intpol)+"/"
+gt_path_3 = "data/task_3/groundTruthInt"+str(intpol)+"/"
 mapping_file_3 = "data/task_3/mapping.txt"
 
 
 vid_list_file_2 = "data/task_2/splits/trainInt"+str(intpol)+".bundle"
-vid_list_file_tst_2 = "data/task_2/splits/test.split.bundle"
-features_path_2 = "data/task_2/featuresStdInt0/"
+vid_list_file_tst_2 = "cd /task_2/splits/test.split.bundle"
+features_path_2 = "data/task_2/featuresStdInt"+str(intpol)+"/"
 gt_path_2 = "data/task_2/groundTruthInt0/"
 
 model_dir = "./models/"+args.dataset+"/split_"+args.split

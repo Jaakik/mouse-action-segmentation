@@ -22,7 +22,6 @@ if __name__ == "__main__":
     for file in tqdm(files):
         seq_id = file.split("/")[-1].split(".")[0]
         features = np.load(inPath + file, allow_pickle=True)
-        # features = np.delete(features, 28, axis=1)
         features = features - np.min(features, axis=0)
         features = np.divide(features, np.max(features, axis=0))
         features = np.where(features!=np.nan, features, 0)

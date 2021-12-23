@@ -45,3 +45,13 @@ if __name__ == "__main__":
         with open(bundle, "w") as out:
             for file in files:
                 out.writelines(file + "\n")
+    elif task==4:
+        featDir = 'data/testFeat/'
+        files = os.listdir(featDir)
+        for tsk in range(1,4):
+            bundleDir = 'data/task_' + str(tsk) + '/splits/'
+            if not os.path.exists(bundleDir):
+                os.makedirs(bundleDir)
+            Path(bundleDir+"test.split.bundle").touch()
+            np.savetxt(bundleDir+"test.split.bundle", files, fmt='%s')
+
