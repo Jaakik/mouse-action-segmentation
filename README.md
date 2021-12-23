@@ -56,19 +56,14 @@ This makes use of the `preprocessing.py` script, which in turns calls `pipeline.
 of the correct file manipulation, all of the data augmentation implementations can be found in the `helpers.py` file. 
 Functions from this file are called from withing the `pipeline.py` script.
 
-# Training & Prediciton 
-Run run.py to generate the predictions using ridge regression with fine tuned hyper parameters. 
+# Training
+Training can be done using the following commands, depending on whether one wishes to train the `tcn` or the `transformer`:
+```
+sh scripts/train_tcn.sh
+sh scripts/train_transformer.sh
+```
 
-## Requirements
-* Python >= 3.8
-* numpy 
-
-
-
-
-
-
-
-
-
-
+It is subsequently possible to generate predictions using:
+```
+sh scripts/predict_transformer.sh 
+```

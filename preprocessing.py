@@ -37,7 +37,10 @@ if __name__ == "__main__":
         te_data = pipeline(test, train=False, task=task, behavior=-1, intpol=0)
     if task<4:
         files = os.listdir(task_dir + "groundTruthInt" + str(intpol) + "/")
-        bundle = task_dir + "splits/trainInt" + str(intpol) + ".bundle"
+        split_dir = task_dir + "splits/"
+        if not os.path.exists(split_dir):
+            os.makedirs(split_dir)
+        bundle = split_dir + "trainInt" + str(intpol) + ".bundle"
         Path(bundle).touch()
         with open(bundle, "w") as out:
             for file in files:
